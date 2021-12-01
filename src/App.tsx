@@ -1,26 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Timer from './Timer';
+import Resource from './Resource';
+import {resourceProps} from './Resource';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+let resList: Array<string> = [
+  "rock", "wood", "tungsten", "iron"
+]
+
+function initialize() {
+  let resources: Array<resourceProps> = []
+  for (let kind of resList) {
+    resources.push(initResource(kind))
+  }
+  return resources;
+}
+
+function initResource(kind: string) {
+  return {
+    kind: kind,
+    amount: 0
+  }
+}
+
+class App extends React.Component {
+  render () {
+    return (
+      <div>
+        renderResource(resources[1])
+        <Timer></Timer>
+      </div>
+    );
+  }
+  renderResource(_props: resourceProps) {
+    return (
+    <Resource
+      resourceProps = {_props}/>)
+  };
 }
 
 export default App;
