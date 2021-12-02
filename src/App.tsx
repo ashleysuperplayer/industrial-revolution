@@ -4,6 +4,16 @@ import Timer from './Timer';
 import Resource from './Resource';
 import {resourceProps} from './Resource';
 
+// data types
+interface appProps {
+
+}
+
+interface appState {
+  resources: Array<resourceProps>
+}
+
+//init
 let resList: Array<string> = [
   "rock", "wood", "tungsten", "iron"
 ]
@@ -23,11 +33,10 @@ function initResource(kind: string) {
   }
 }
 
-class App extends React.Component {
-  resources: Array<resourceProps>;
+class App extends React.Component<appProps, appState> {
   constructor(props: any) {
     super(props)
-    this.resources = initialize()
+    this.state = {resources: initialize()}
   }
   render () {
     return (
@@ -45,7 +54,7 @@ class App extends React.Component {
   };
   renderResources() {
     let stitchedResources: Array<JSX.Element> = []
-    for (let resource of this.resources) {
+    for (let resource of this.state.resources) {
       stitchedResources.push(this.renderResource(resource))
     }
     return stitchedResources
