@@ -24,10 +24,15 @@ function initResource(kind: string) {
 }
 
 class App extends React.Component {
+  resources: Array<resourceProps>;
+  constructor(props: any) {
+    super(props)
+    this.resources = initialize()
+  }
   render () {
     return (
       <div>
-        renderResource(resources[1])
+        {this.renderResources()}
         <Timer></Timer>
       </div>
     );
@@ -35,8 +40,16 @@ class App extends React.Component {
   renderResource(_props: resourceProps) {
     return (
     <Resource
-      resourceProps = {_props}/>)
+      kind = {_props.kind}
+      amount = {_props.amount}/>)
   };
+  renderResources() {
+    let stitchedResources: Array<JSX.Element> = []
+    for (let resource of this.resources) {
+      stitchedResources.push(this.renderResource(resource))
+    }
+    return stitchedResources
+  }
 }
 
 export default App;

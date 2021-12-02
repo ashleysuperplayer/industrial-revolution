@@ -14,7 +14,7 @@ class Timer extends React.Component<timerProps, timerState> {
         this.state = { time: new Date().toLocaleString() };
         this.intervalID = 0;
     }
-    render () {
+    render () { 
         return (
             null
         )

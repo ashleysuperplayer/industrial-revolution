@@ -14,13 +14,13 @@ export interface resourceState {
 //     )
 // }
 
-class Resource extends React.Component<resourceProps, resourceState> {
-    constructor(props) {
+class Resource extends React.Component<resourceProps, resourceState> { // eslint-disable-next-line
+    constructor(props: resourceProps) {
         super(props)
     }
     render() {
         return(
-            <div></div>
+            <div>{this.props.kind}: {this.props.amount}</div>
         );
     }
     tick() {
