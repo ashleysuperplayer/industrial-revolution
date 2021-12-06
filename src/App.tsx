@@ -30,7 +30,7 @@ function App(props: appProps) {
 
   //placeholder for when i actually implement changing delta
   function updateResourceDeltas() {
-    setLabour({...labour, delta: labour.delta});
+    setLabour({...labour, delta: labour.amount * 1.01});
   }
 
   //initialise resource state
