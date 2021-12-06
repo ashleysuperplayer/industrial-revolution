@@ -1,38 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { updateSourceFile } from 'typescript';
 
 type timerProps = {
+    handleUpdate: Function
 };
 
-type timerState = {
-    time: string;
-};
-
-class Timer extends React.Component<timerProps, timerState> {
-    intervalID: number;
-    constructor(props: timerProps) {
-        super(props);
-        this.state = { time: new Date().toLocaleString() };
-        this.intervalID = 0;
+function Timer(props: timerProps) {
+    useEffect(() => {
+        const timerID = setInterval(tick, 200);
+    
+        return () => clearInterval(timerID);
+      });
+    
+    function tick() {
+      props.handleUpdate()
     }
-    render () { 
-        return (
-            null
-        )
-    }
-    componentDidMount() {
-        this.intervalID = window.setInterval(
-            () => this.tick(),
-            200
-        );
-    }
-    componentWillUnmount() {
-        clearInterval(this.intervalID)
-    }
-    tick() {
-        this.setState({
-            time: new Date().toLocaleString()
-        })
-    }
+    return (
+      <div></div>
+    )
 }
 
 export default Timer;

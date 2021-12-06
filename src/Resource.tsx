@@ -3,6 +3,7 @@ import React from 'react'
 export interface resourceProps {
     kind: string;
     amount: number;
+    delta: number;
 }
 
 export interface resourceState {

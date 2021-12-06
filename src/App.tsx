@@ -1,64 +1,60 @@
-import React from 'react';
+import { stringify } from 'querystring';
+import React, { useState, useEffect } from 'react';
+import { updateSourceFile } from 'typescript';
 import './App.css';
-import Timer from './Timer';
-import Resource from './Resource';
-import {resourceProps} from './Resource';
+import Timer from './Timer'
 
-// data types
+// structs
 interface appProps {
 
 }
 
-interface appState {
-  resources: Array<resourceProps>
+interface Resource {
+  name: string,
+  delta: number,
+  amount: number
 }
 
-//init
-let resList: Array<string> = [
-  "rock", "wood", "tungsten", "iron"
-]
+// let resList: Array<string> = [
+//   "rock", "wood", "tungsten", "iron"
+// ]
 
-function initialize() {
-  let resources: Array<resourceProps> = []
-  for (let kind of resList) {
-    resources.push(initResource(kind))
+function App(props: appProps) {
+  function update() {
+    updateResources();
   }
-  return resources;
-}
 
-function initResource(kind: string) {
-  return {
-    kind: kind,
-    amount: 0
+  function updateResources() {
+    setLabour({name: "labour", delta: labour.delta, amount: labour.delta + labour.amount});
+    setRock({...rock, amount: labour.delta + labour.amount});
+    setWood({...wood, amount: labour.delta + labour.amount});
+    setIron({...iron, amount: labour.delta + labour.amount});
   }
-}
 
-class App extends React.Component<appProps, appState> {
-  constructor(props: any) {
-    super(props)
-    this.state = {resources: initialize()}
-  }
-  render () {
-    return (
+  //initialise resource state
+  const [labour, setLabour] = useState<Resource>({name: "labour", delta: 1, amount: 0});
+  const [rock, setRock] = useState<Resource>({name: "rock", delta: 0, amount: 0});
+  const [wood, setWood] = useState<Resource>({name: "wood", delta: 0, amount: 0});
+  const [iron, setIron] = useState<Resource>({name: "iron", delta: 0, amount: 0});
+
+  return ( 
+  <div>
+    <div>
       <div>
-        {this.renderResources()}
-        <Timer></Timer>
+        {labour.name} {labour.amount} {labour.delta}
       </div>
-    );
-  }
-  renderResource(_props: resourceProps) {
-    return (
-    <Resource
-      kind = {_props.kind}
-      amount = {_props.amount}/>)
-  };
-  renderResources() {
-    let stitchedResources: Array<JSX.Element> = []
-    for (let resource of this.state.resources) {
-      stitchedResources.push(this.renderResource(resource))
-    }
-    return stitchedResources
-  }
+      <div>
+        {rock.name} {rock.amount} {rock.delta}
+      </div>
+      <div>
+        {wood.name} {wood.amount} {wood.delta}
+      </div>
+      <div>
+        {iron.name} {iron.amount} {iron.delta}
+      </div>
+    </div>
+    <Timer handleUpdate = {update}></Timer>
+  </div>)
 }
 
 export default App;
