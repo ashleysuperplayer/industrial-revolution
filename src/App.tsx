@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Timer from './Timer'
 import Resource from './Resource'
-import { deflate } from 'zlib';
 
 // structs
 interface appProps {
@@ -30,7 +29,8 @@ function App(props: appProps) {
 
   //placeholder for when i actually implement changing delta
   function updateResourceDeltas() {
-    setLabour({...labour, delta: labour.amount * 1.01});
+    setLabour({...labour, delta: labour.delta});
+    console.log("updated delta"); //debugging
   }
 
   //initialise resource state
@@ -44,6 +44,7 @@ function App(props: appProps) {
     <div>
       <div>
         <Resource name = {labour.name} amount = {labour.amount}></Resource>
+        {labour.delta /*debugging*/}
       </div>
       <div>
         <Resource name = {rock.name} amount = {rock.amount}></Resource>
