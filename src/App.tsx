@@ -25,15 +25,15 @@ function App(props: appProps) {
   }
 
   function updateResources() {
-    setLabour({name: "labour", delta: labour.delta, amount: labour.delta + labour.amount});
-    setRock({...rock, amount: labour.delta + labour.amount});
-    setWood({...wood, amount: labour.delta + labour.amount});
-    setIron({...iron, amount: labour.delta + labour.amount});
+    setLabour({...labour, amount: labour.delta + labour.amount});
+    setRock({...rock, amount: rock.delta + rock.amount});
+    setWood({...wood, amount: wood.delta + wood.amount});
+    setIron({...iron, amount: iron.delta + iron.amount});
   }
 
   //initialise resource state
   const [labour, setLabour] = useState<Resource>({name: "labour", delta: 1, amount: 0});
-  const [rock, setRock] = useState<Resource>({name: "rock", delta: 0, amount: 0});
+  const [rock, setRock] = useState<Resource>({name: "rock", delta: 1.1, amount: 0});
   const [wood, setWood] = useState<Resource>({name: "wood", delta: 0, amount: 0});
   const [iron, setIron] = useState<Resource>({name: "iron", delta: 0, amount: 0});
 
