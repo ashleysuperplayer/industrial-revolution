@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { updateSourceFile } from 'typescript';
+import { useEffect } from 'react';
 
 type timerProps = {
     handleUpdate: Function

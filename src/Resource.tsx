@@ -1,32 +1,12 @@
-import React from 'react'
-
-export interface resourceProps {
-    kind: string;
+interface resourceProps {
+    name: string;
     amount: number;
-    delta: number;
-}
+  }
 
-export interface resourceState {
-}
-
-// function Resource(props) {
-//     return (
-//         <div>{this.props.kind}: {this.props.amount}</div>
-//     )
-// }
-
-class Resource extends React.Component<resourceProps, resourceState> { // eslint-disable-next-line
-    constructor(props: resourceProps) {
-        super(props)
-    }
-    render() {
-        return(
-            <div>{this.props.kind}: {this.props.amount}</div>
-        );
-    }
-    tick() {
-        
-    }
+function Resource(props: resourceProps) {
+    return (
+        <div>{props.name}: {props.amount}</div>
+    )
 }
 
 export default Resource;
