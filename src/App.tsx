@@ -5,7 +5,6 @@ import Resource from './Resource'
 
 // structs
 interface appProps {
-
 }
 
 interface resourceState {
@@ -16,25 +15,37 @@ interface resourceState {
 
 function App(props: appProps) {
   function update() {
-    updateResourceDeltas();
     updateResourceAmounts();
+    updateResourceDeltas();
+  }
+
+  function newAmount(oldResource: resourceState) {
+    let newResource = oldResource
+    newResource.amount += newResource.delta
+    return newResource
   }
 
   function updateResourceAmounts() {
-    setLabour({...labour, amount: labour.delta + labour.amount});
-    setRock({...rock, amount: rock.delta + rock.amount});
-    setWood({...wood, amount: wood.delta + wood.amount});
-    setIron({...iron, amount: iron.delta + iron.amount});
+    setLabour(() => {let newLabour = labour; newLabour.amount += newLabour.delta; return newLabour;}); //i wonder if they all work as arrow functions?
+    setRock(newAmount(rock));
+    setWood(newAmount(wood));
+    setIron({...iron, amount: iron.delta + iron.amount}); // react stops updating amounts when i change this to use newAmount
   }
 
-  //placeholder for when i actually implement changing delta
+  
+  function growLabour() {
+    let newLabour = labour;
+    newLabour.delta = newLabour.amount * 0.08;
+    setLabour(newLabour);
+  }
+
   function updateResourceDeltas() {
-    setLabour({...labour, delta: labour.delta});
-    console.log("updated delta"); //debugging
+    growLabour();
+    console.log("updated delta " + (labour.delta)); //debugging
   }
 
   //initialise resource state
-  const [labour, setLabour] = useState<resourceState>({name: "labour", delta: 1, amount: 0});
+  const [labour, setLabour] = useState<resourceState>({name: "labour", delta: 1, amount: 10});
   const [rock, setRock] = useState<resourceState>({name: "rock", delta: 1.1, amount: 0});
   const [wood, setWood] = useState<resourceState>({name: "wood", delta: 0, amount: 0});
   const [iron, setIron] = useState<resourceState>({name: "iron", delta: 0, amount: 0});
