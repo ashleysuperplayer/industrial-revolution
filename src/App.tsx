@@ -3,6 +3,7 @@ import './App.css';
 import Timer from './Timer'
 import Resource from './Resource'
 import Button from './Button'
+import { resourceUsage } from 'process';
 
 // structs
 interface appProps {
@@ -22,33 +23,44 @@ function App(props: appProps) {
     updateResources();
   }
 
-  // function calcDelta(someResource: resourceState) {
-  //   for(let effect of someResource.deltaEffects) {
-  //     someResource.delta = someResource.deltaBase
-  //   }
-  // }
+  function calcDelta(resource: resourceState) {
+    let newDelta: number = resource.deltaBase;
+    for (let effect of resource.deltaEffects) {
+      newDelta *= effect;
+    }
+    return {...resource, delta: newDelta};
+  }
 
   function resourceClick(resource: resourceState) {
-    console.log("button clicked")
+    console.log("button clicked");
   }
 
   function newAmount(oldResource: resourceState) {
-    let newResource = oldResource
-    newResource.amount += newResource.delta
-    console.log(newResource.amount)
-    return ({...newResource})
+    let newResource = oldResource;
+    newResource.amount += newResource.delta;
+    console.log(newResource.amount);
+    return ({...newResource});
+  }
+
+  function newLabourAmount(oldLabour: resourceState) {
+    let newAmount: number = population.amount;
+    for (let effect of oldLabour.deltaEffects) {
+      newAmount *= effect;
+    }
+    return ({...oldLabour, amount: newAmount});
   }
 
   function updateResources() {
-    setLabour(newAmount(labour)); //i wonder if they all work as arrow functions?
+    setPopulation(newAmount(population));
+    setLabour(newLabourAmount(labour));
     setRock(newAmount(rock));
     setWood(newAmount(wood));
-    setIron(newAmount(iron)); // react stops updating amounts when i change this to use newAmount
+    setIron(newAmount(iron));
   }
 
   //initialise resource state
-  // const [population, setPopulation] = useState<resourceState>({name: "population", delta: 0, amount: 100000, deltaEffects: [1], deltaBase: 1});
-  const [labour, setLabour] = useState<resourceState>({name: "labour", delta: 1, amount: 10, deltaEffects: [1], deltaBase: 1});
+  const [population, setPopulation] = useState<resourceState>({name: "population", delta: 0, amount: 100, deltaEffects: [1, 1.02], deltaBase: 1});
+  const [labour, setLabour] = useState<resourceState>({name: "labour", delta: 0, amount: 0, deltaEffects: [0.4, 2], deltaBase: 0});
   const [rock, setRock] = useState<resourceState>({name: "rock", delta: 5, amount: 0, deltaEffects: [1], deltaBase: 1});
   const [wood, setWood] = useState<resourceState>({name: "wood", delta: 5, amount: 0, deltaEffects: [1], deltaBase: 1});
   const [iron, setIron] = useState<resourceState>({name: "iron", delta: 5, amount: 0, deltaEffects: [1], deltaBase: 1});
@@ -56,6 +68,9 @@ function App(props: appProps) {
   return ( 
   <div>
     <div>
+      <div>
+        <Resource name = {population.name} amount = {population.amount}></Resource>
+      </div>
       <div>
         <Button className = "" onClick = {() => resourceClick(labour)} text="labour"/>
         <Resource name = {labour.name} amount = {labour.amount}></Resource>
