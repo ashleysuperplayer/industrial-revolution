@@ -1,6 +1,6 @@
 interface resourceProps {
     name: string;
-    amount: number;
+    amount: string;
   }
 
 function Resource(props: resourceProps) {
