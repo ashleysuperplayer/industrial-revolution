@@ -7,7 +7,7 @@ type timerProps = {
 function Timer(props: timerProps) {
     useEffect(() => {
         const timerID = setInterval(tick, 20);
-    
+
         return () => clearInterval(timerID);
       });
     

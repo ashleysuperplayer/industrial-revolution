@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
 import Timer from './Timer'
 import Resource from './Resource'
 import Button from './Button'
-
-// space * crime * disease
-
+import './index.css';
 
 // structs
 interface appProps {
 
+}
+
+interface producerState {
+  name: string;
+  delta: number;
+  deltaEffects: Array<number>;
+  deltaBase: number;
 }
 
 interface resourceState {
@@ -57,12 +61,12 @@ function App(props: appProps) {
   }
 
   function populationGrowth(oldPopulation: resourceState) {
-    let r = 1; // growth rate coefficient. all effects on population growth e.g. disease, pollution, crime
+    let r = 10; // growth rate coefficient. all effects on population growth e.g. disease, pollution, crime
+    let k = 1000; // carrying capacity. k stands for KISS, space / space requirement
+    let P = oldPopulation.amount; // current population
     for (let effect of oldPopulation.deltaEffects) {
       r *= effect;
     }
-    let k = 1000; // carrying capacity. k stands for KISS, space / space requirement
-    let P = oldPopulation.amount; // current population
     return({...oldPopulation, delta: r*P*(1-P/k)});
   }
 
@@ -86,7 +90,7 @@ function App(props: appProps) {
   const [iron, setIron] = useState<resourceState>({name: "iron", delta: 5, amount: 0, deltaEffects: [1], deltaBase: 1});
 
   return ( 
-  <div>
+  <body className="topDiv">
     <div>
       <div>
         <Resource name = {population.name} amount = {Math.round(population.amount).toString()}></Resource>
@@ -110,7 +114,7 @@ function App(props: appProps) {
     <div>
       <Timer handleUpdate = {update}></Timer>
     </div>
-  </div>)
+  </body>)
 }
 
 export default App;
