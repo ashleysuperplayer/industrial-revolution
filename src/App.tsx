@@ -12,8 +12,10 @@ interface appProps {
 interface producerState {
   name: string;
   delta: number;
+  amount: number;
   deltaEffects: Array<number>;
   deltaBase: number;
+  product: string; // idk what type this will be yet
 }
 
 interface resourceState {
@@ -84,7 +86,7 @@ function App(props: appProps) {
 
   //initialise resource state
   const [population, setPopulation] = useState<resourceState>({name: "population", delta: 0, amount: 7870000, deltaEffects: [1, 0.001], deltaBase: 1});
-  const [labour, setLabour] = useState<resourceState>({name: "labour", delta: 0, amount: 0, deltaEffects: [0.4], deltaBase: 0});
+  const [labour, setLabour] = useState<resourceState>({name: "labour", delta: 0, amount: 0, deltaEffects: [0.48], deltaBase: 0});
   const [rock, setRock] = useState<resourceState>({name: "rock", delta: 5, amount: 0, deltaEffects: [1], deltaBase: 1});
   const [wood, setWood] = useState<resourceState>({name: "wood", delta: 5, amount: 0, deltaEffects: [1], deltaBase: 1});
   const [iron, setIron] = useState<resourceState>({name: "iron", delta: 5, amount: 0, deltaEffects: [1], deltaBase: 1});

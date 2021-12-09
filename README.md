@@ -46,7 +46,7 @@
 * implement labour
     * labour will be the primary scarcity throughout the game
     * as shipping increases and colonial holdings increase, shipping can be built and assigned to transporting migrants from other countries to remedy labour shortages
-    * encourage 90%-95% employment rate 
+    * encourage 90%-95% employment rate to react to overall population fluctuations
 * implement "random" events
     * events that are pseudo-random, such as the country going to war, trade wars with rival economies, absorbtion of nearby dominion etc
 * historical considerations
