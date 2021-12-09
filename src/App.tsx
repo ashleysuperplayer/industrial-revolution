@@ -6,7 +6,7 @@ import './index.css';
 
 // structs
 interface appProps {
-
+  
 }
 
 interface producerState {
@@ -61,8 +61,8 @@ function App(props: appProps) {
   }
 
   function populationGrowth(oldPopulation: resourceState) {
-    let r = 10; // growth rate coefficient. all effects on population growth e.g. disease, pollution, crime
-    let k = 1000; // carrying capacity. k stands for KISS, space / space requirement
+    let r = 1; // growth rate coefficient. all effects on population growth e.g. disease, pollution, crime
+    let k = 10000000; // carrying capacity. k stands for KISS, space / space requirement
     let P = oldPopulation.amount; // current population
     for (let effect of oldPopulation.deltaEffects) {
       r *= effect;
@@ -83,7 +83,7 @@ function App(props: appProps) {
   }
 
   //initialise resource state
-  const [population, setPopulation] = useState<resourceState>({name: "population", delta: 0, amount: 100, deltaEffects: [1, 0.001], deltaBase: 1});
+  const [population, setPopulation] = useState<resourceState>({name: "population", delta: 0, amount: 7870000, deltaEffects: [1, 0.001], deltaBase: 1});
   const [labour, setLabour] = useState<resourceState>({name: "labour", delta: 0, amount: 0, deltaEffects: [0.4], deltaBase: 0});
   const [rock, setRock] = useState<resourceState>({name: "rock", delta: 5, amount: 0, deltaEffects: [1], deltaBase: 1});
   const [wood, setWood] = useState<resourceState>({name: "wood", delta: 5, amount: 0, deltaEffects: [1], deltaBase: 1});
