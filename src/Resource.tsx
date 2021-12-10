@@ -3,10 +3,10 @@ interface resourceProps {
     amount: string;
   }
 
-function Resource(props: resourceProps) {
+function ResourceDisplay(props: resourceProps) {
     return (
         <div>{props.name}: {props.amount}</div>
     )
 }
 
-export default Resource;
+export default ResourceDisplay;
