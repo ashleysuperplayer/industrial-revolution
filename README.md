@@ -24,6 +24,14 @@
     * some kind of formula that causes people to starve more due to increased prices due to increased size + population density of cities
     * increased shipping and navy production = less logistical malus from importing goods like coal etc.
     * eventually building shipping for importing certain goods will eclipse local production by a wide margin
+* implement thirst and hunger
+    * implement starvation (food scarcity) effect on pop growth
+    * implement beer
+    * implement water
+    * implement spirits
+    * meat
+        * every tick, some % of meat is lost to spoilage based on logistics and maybe refrigeration technology
+        * cured meat decays at 1/100th the rate of meat
 * implement farming
     * seasons and weather
     * one shared "farm" area that represents all farming in the country?

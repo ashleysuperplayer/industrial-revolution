@@ -9,7 +9,7 @@ interface appProps {
   
 }
 
-interface City {
+interface CityProps {
   name: string;
   space: number;
   resources: Array<Resource>;
@@ -18,7 +18,7 @@ interface City {
 interface Country {
   name: string;
   space: number;
-  cities: Array<City>;
+  cities: Array<CityProps>;
 }
 
 interface Producer {
