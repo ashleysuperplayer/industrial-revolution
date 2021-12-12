@@ -1,3 +1,6 @@
+# this is abandoned because i realised react sucks for doing this kind of thing
+# i will come back to it when i get a real job
+
 # Industrial revoluton tiem ! ;^D
 
 # TODO
